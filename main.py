@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+# ^ needed for Dockerfile
+
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from transformers import pipeline
 
