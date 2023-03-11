@@ -2,11 +2,7 @@
 # ^ needed for Dockerfile
 
 from http.server import BaseHTTPRequestHandler, HTTPServer
-from transformers import pipeline
-
-def BertBaseUncased(input: str):
-    unmasker = pipeline('fill-mask', model='bert-base-uncased')
-    return unmasker(input)
+from models.BertBaseUncased import BertBaseUncased
 
 hostName = "localhost"
 serverPort = 8080
