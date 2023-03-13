@@ -15,14 +15,16 @@ class MyServer(BaseHTTPRequestHandler):
         self.send_header("Content-type", "text")
         self.end_headers()
         # this is some magic - apparently parameters are stored as "self.server.xxx"
-        self.wfile.write(bytes(str(self.server.model("Hello I'm a [MASK] model.")), "utf-8"))
+        self.wfile.write(
+            bytes(str(self.server.model("Hello I'm a [MASK] model.")), "utf-8")
+        )
 
 
 if __name__ == "__main__":
     webServer = HTTPServer((hostName, serverPort), MyServer)
 
-    model_name = os.environ['NAUTICAL_MODEL']
-    if model_name == 'bert-base-uncased':
+    model_name = os.environ["NAUTICAL_MODEL"]
+    if model_name == "bert-base-uncased":
         webServer.model = BertBaseUncased
         # run this on an empty string so it downloads model weights the first time it starts
         BertBaseUncased("[MASK]")
