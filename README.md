@@ -1,4 +1,4 @@
-![docker build](https://github.com/nautical-io/nautical/actions/workflows/ci.yaml/badge.svg)
+![docker build](https://github.com/nautical-io/nautical/actions/workflows/publish.yaml/badge.svg)
 
 
 Nautical is an Open Source Machine Learning Model Serving Framework.

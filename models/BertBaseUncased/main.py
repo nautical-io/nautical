@@ -2,13 +2,14 @@
 # ^ needed for Dockerfile
 
 from http.server import BaseHTTPRequestHandler, HTTPServer
-from models.BertBaseUncased import BertBaseUncased
+from BertBaseUncased import BertBaseUncased
 import os
 import json
 
 hostName = "0.0.0.0"
 serverPort = 8080
 contentLengthHeaderName = "content-length"
+
 
 class MyServer(BaseHTTPRequestHandler):
 
@@ -27,16 +28,14 @@ class MyServer(BaseHTTPRequestHandler):
             bytes(str(self.server.model(message['query'])), "utf-8")
         )
 
+
 if __name__ == "__main__":
     webServer = HTTPServer((hostName, serverPort), MyServer)
+    webServer.model = BertBaseUncased
 
-    model_name = os.environ["NAUTICAL_MODEL"]
-    if model_name == "bert-base-uncased":
-        webServer.model = BertBaseUncased
-
-        # this will run the model on an empty string - forcing it to download
-        # weights from the huggingface hub the first time
-        BertBaseUncased("[MASK]")
+    # this will run the model on an empty string - forcing it to download
+    # weights from the huggingface hub the first time
+    BertBaseUncased("[MASK]")
 
     print("Server started http://%s:%s" % (hostName, serverPort))
 
