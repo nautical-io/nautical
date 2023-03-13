@@ -17,3 +17,14 @@ To start the server on local machine, run
 ```
 NAUTICAL_MODEL=bert-base-uncased python3 main.py
 ```
+
+To Install lint checkers for python
+```
+pip install flake8 flake8-black
+```
+
+To run python lint
+```
+flake8
+black .
+```
