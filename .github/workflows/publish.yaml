@@ -22,6 +22,6 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
-          context: models/BertBaseUncased/
+          context: models/bert-base-uncased/
           push: true
           tags: annanay25/nautical-bert-base-uncased:latest

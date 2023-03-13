@@ -3,7 +3,6 @@
 
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from BertBaseUncased import BertBaseUncased
-import os
 import json
 
 hostName = "0.0.0.0"
@@ -12,7 +11,6 @@ contentLengthHeaderName = "content-length"
 
 
 class MyServer(BaseHTTPRequestHandler):
-
     # do_POST gives access to the "content-length" header
     def do_POST(self):
         # parse the request and extract query
@@ -24,9 +22,7 @@ class MyServer(BaseHTTPRequestHandler):
         self.end_headers()
 
         # this is some magic - apparently parameters are stored as "self.server.xxx"
-        self.wfile.write(
-            bytes(str(self.server.model(message['query'])), "utf-8")
-        )
+        self.wfile.write(bytes(str(self.server.model(message["query"])), "utf-8"))
 
 
 if __name__ == "__main__":

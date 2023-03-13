@@ -1,4 +1,4 @@
 [flake8]
 ignore = E402
-exclude = .git,__pycache__,docs/source/conf.py,old,build,dist,.vscode,modules,myprojectenv/
+exclude = .git,__pycache__,docs/source/conf.py,old,build,dist,.vscode,modules,myprojectenv/,venv/
 max-line-length = 150
