@@ -4,21 +4,28 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from models.BertBaseUncased import BertBaseUncased
 import os
+import json
 
 hostName = "0.0.0.0"
 serverPort = 8080
-
+contentLengthHeaderName = "content-length"
 
 class MyServer(BaseHTTPRequestHandler):
-    def do_GET(self):
+
+    # do_POST gives access to the "content-length" header
+    def do_POST(self):
+        # parse the request and extract query
+        req_body = self.rfile.read(int(self.headers.get(contentLengthHeaderName)))
+        message = json.loads(req_body)
+
         self.send_response(200)
-        self.send_header("Content-type", "text")
+        self.send_header("Content-type", "application/json")
         self.end_headers()
+
         # this is some magic - apparently parameters are stored as "self.server.xxx"
         self.wfile.write(
-            bytes(str(self.server.model("Hello I'm a [MASK] model.")), "utf-8")
+            bytes(str(self.server.model(message['query'])), "utf-8")
         )
-
 
 if __name__ == "__main__":
     webServer = HTTPServer((hostName, serverPort), MyServer)
@@ -26,7 +33,9 @@ if __name__ == "__main__":
     model_name = os.environ["NAUTICAL_MODEL"]
     if model_name == "bert-base-uncased":
         webServer.model = BertBaseUncased
-        # run this on an empty string so it downloads model weights the first time it starts
+
+        # this will run the model on an empty string - forcing it to download
+        # weights from the huggingface hub the first time
         BertBaseUncased("[MASK]")
 
     print("Server started http://%s:%s" % (hostName, serverPort))
