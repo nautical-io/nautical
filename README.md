@@ -12,11 +12,9 @@ We love building developer tools!
 
 ## Running
 
-To start the server on local machine, run
+Check the README's present in individual model folders under `models/` for specific instructions on running each model.
 
-```
-python3 models/bert-base-uncased/main.py
-```
+## Lint
 
 To Install lint checkers for python
 ```
