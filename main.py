@@ -8,6 +8,7 @@ import os
 hostName = "0.0.0.0"
 serverPort = 8080
 
+
 class MyServer(BaseHTTPRequestHandler):
     def do_GET(self):
         self.send_response(200)
@@ -15,6 +16,7 @@ class MyServer(BaseHTTPRequestHandler):
         self.end_headers()
         # this is some magic - apparently parameters are stored as "self.server.xxx"
         self.wfile.write(bytes(str(self.server.model("Hello I'm a [MASK] model.")), "utf-8"))
+
 
 if __name__ == "__main__":
     webServer = HTTPServer((hostName, serverPort), MyServer)
