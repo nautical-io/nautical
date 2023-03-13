@@ -15,7 +15,7 @@ We love building developer tools!
 To start the server on local machine, run
 
 ```
-NAUTICAL_MODEL=bert-base-uncased python3 main.py
+python3 models/bert-base-uncased/main.py
 ```
 
 To Install lint checkers for python
