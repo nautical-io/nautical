@@ -8,8 +8,13 @@ RUN pip install -r requirements.txt
 
 ENV USE_TORCH=1
 
-COPY main.py /usr/local/bin/
+WORKDIR /home/nautical
 
-RUN chmod +x /usr/local/bin/main.py
+COPY main.py /home/nautical/
 
-ENTRYPOINT [ "/usr/local/bin/main.py" ]
+RUN mkdir -p /home/nautical/models
+COPY models/* /home/nautical/models/
+
+RUN chmod +x /home/nautical/main.py
+
+ENTRYPOINT [ "/home/nautical/main.py" ]

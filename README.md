@@ -1,3 +1,6 @@
+![docker build](https://github.com/nautical-io/nautical/actions/workflows/ci.yaml/badge.svg)
+
+
 Nautical is an Open Source Machine Learning Model Serving Framework.
 
 1. Supports popular machine learning frameworks like PyTorch and Tensorflow.
@@ -6,3 +9,11 @@ Nautical is an Open Source Machine Learning Model Serving Framework.
 4. Provides SDKs in popular languages like Python and Java.
 
 We love building developer tools!
+
+## Running
+
+To start the server on local machine, run
+
+```
+NAUTICAL_MODEL=bert-base-uncased python3 main.py
+```
