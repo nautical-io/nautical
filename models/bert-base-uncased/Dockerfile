@@ -10,10 +10,7 @@ ENV USE_TORCH=1
 
 WORKDIR /home/nautical
 
-COPY main.py /home/nautical/
-
-RUN mkdir -p /home/nautical/models
-COPY models/* /home/nautical/models/
+COPY main.py BertBaseUncased.py __init__.py /home/nautical/
 
 RUN chmod +x /home/nautical/main.py
 
