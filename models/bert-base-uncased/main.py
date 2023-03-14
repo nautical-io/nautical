@@ -3,15 +3,27 @@
 
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from BertBaseUncased import BertBaseUncased
+from prometheus_client import generate_latest, Summary, REGISTRY
 import json
 
 hostName = "0.0.0.0"
 serverPort = 8080
 contentLengthHeaderName = "content-length"
+# metric to track time spent and requests made.
+REQUEST_TIME = Summary("request_processing_seconds", "Time spent processing request")
 
 
 class MyServer(BaseHTTPRequestHandler):
+    # do_GET needed for Prometheus metrics
+    def do_GET(self):
+        if self.path == "/metrics":
+            self.send_response(200)
+            self.send_header("Content-type", "text/plain")
+            self.end_headers()
+            self.wfile.write(generate_latest(REGISTRY))
+
     # do_POST gives access to the "content-length" header
+    @REQUEST_TIME.time()
     def do_POST(self):
         # parse the request and extract query
         req_body = self.rfile.read(int(self.headers.get(contentLengthHeaderName)))
