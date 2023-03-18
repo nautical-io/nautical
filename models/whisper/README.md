@@ -14,11 +14,11 @@ docker run --rm -it -p 8080:8080 annanay25/nautical-whisper:latest
 
 ## Query the model / call the model API
 
-The model is accessible at `https://localhost:8080`. The below screenshot shows how to query it using [Postman](https://www.postman.com/).
+The model is accessible at `https://localhost:8080/upload`. The below screenshot shows how to query it using [Postman](https://www.postman.com/).
 
 > Note: Model works only with `POST` requests.
 
-![Querying](postman-bert-base-uncased.png)
+![Querying](postman-whisper.png)
 
 ## Prometheus metrics for API request time
 

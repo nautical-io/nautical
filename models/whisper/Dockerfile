@@ -1,6 +1,6 @@
 FROM python:3.10-slim-bullseye
 
-RUN sudo apt update && sudo apt install ffmpeg
+RUN apt update -y && apt install -y ffmpeg
 
 COPY requirements.txt /
 
@@ -10,8 +10,9 @@ ENV USE_TORCH=1
 
 WORKDIR /home/nautical
 
-COPY main.py whisper.py __init__.py /home/nautical/
+COPY main.py test-data/lachlan_evenson.mp3 /home/nautical/
 
-RUN chmod +x /home/nautical/main.py
+RUN chmod +x /home/nautical/main.py &&\
+    mkdir -p /home/nautical/uploads
 
 ENTRYPOINT [ "/home/nautical/main.py" ]
