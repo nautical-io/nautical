@@ -19,9 +19,15 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build and push
+      - name: Build and push BERT
         uses: docker/build-push-action@v4
         with:
           context: models/bert-base-uncased/
           push: true
           tags: annanay25/nautical-bert-base-uncased:latest
+      - name: Build and push Whisper
+        uses: docker/build-push-action@v4
+        with:
+          context: models/whisper/
+          push: true
+          tags: annanay25/nautical-whisper:latest
