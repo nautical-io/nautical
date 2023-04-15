@@ -1,0 +1,25 @@
+version: '3'
+services:
+  nginx:
+    build: ./nginx
+    ports:
+      - "8080:80"
+    depends_on:
+      - bert-base-uncased
+      - whisper
+      # - stable-diffusion
+
+  bert-base-uncased:
+    image: annanay25/nautical-bert-base-uncased:latest
+    ports:
+      - "8080"
+
+  whisper:
+    image: annanay25/nautical-whisper:latest
+    ports:
+      - "8080"
+
+  # stable-diffusion:
+  #   image: stable-diffusion:latest
+  #   ports:
+  #     - "8080"
